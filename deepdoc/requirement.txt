@@ -21,3 +21,4 @@ chardet
 python-pptx
 aspose-slides
 PyPDF2
+xgboost
