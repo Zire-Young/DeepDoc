@@ -1,0 +1,46 @@
+1. Introduction
+ In recent years, Large Language Models (LLMs) have been undergoing rapid iteration and
+evolution (Anthropic, 2024; Google, 2024; OpenA1, 2024a), progressively diminishing the gap
+towards Artificial General Intelligence (AGI).
+Recently, post-training has emerged as an important component of the full training pipeline.
+It has been shown to enhance accuracy on reasoning tasks, align with social values, and adapt
+to user preferences, all while requiring relatively minimal computational resources against
+ pre-training. In the context of reasoning capabilities, OpenAI's 01 (OpenAI, 2024b) series models
+were the first to introduce inference-time scaling by increasing the length of the Chain-of-
+ Thought reasoning process. This approach has achieved significant improvements in various
+ reasoning tasks, such as mathematics, coding, and scientific reasoning. However, the challenge
+ of effective test-time scaling remains an open question for the research community. Several prior
+Works have explored various approaches, including process-based reward models (Lightman
+et al., 2023; Uesato et al., 2022; Wang et al., 2023), reinforcement learning (Kumar et al., 2024),
+and search algorithms such as Monte Carlo Tree Search and Beam Search (Feng et al., 2024; Trinh
+et al., 2024; Xin et al., 2024). However, none of these methods has achieved general reasoning
+performance comparable to OpenAI's ol series models.
+In this paper, we take the first step toward improving language model reasoning capabilities
+using pure reinforcement learning (RL). Our goal is to explore the potential of LLMs to develop
+reasoning capabilities without any supervised data, focusing on their self-evolution through
+a pure RL process. Specifically, we use DeepSeek-V3-Base as the base model and employ
+ GRPO (Shao et al., 2024) as the RL framework to improve model performance in reasoning.
+ During training, DeepSeek-R1-Zero naturally emerged with numerous powerful and interesting
+ reasoning behaviors. After thousands of RL steps, DeepSeek-R1-Zero exhibits super performance
+ on reasoning benchmarks. For instance, the pass@1 score on AIME 2024 increases from 15.6% to
+ 71.0%, and with majority voting, the score further improves to 86.7%, matching the performance
+of OpenAI-o1-0912.
+ However, DeepSeek-R1-Zero encounters challenges such as poor readability, and language
+mixing. To address these issues and further enhance reasoning performance, we introduce
+ DeepSeek-R1, which incorporates a small amount of cold-start data and a multi-stage training
+pipeline. Specifically, we begin by collecting thousands of cold-start data to fine-tune the
+ DeepSeek-V3-Base model. Following this, we perform reasoning-oriented RL like DeepSeek-R1-
+Zero. Upon nearing convergence in the RL process, we create new SFT data through rejection
+sampling on the RL checkpoint, combined with supervised data from DeepSeek-V3 in domains
+such as writing, factual QA, and self-cognition, and then retrain the DeepSeek-V3-Base model.
+After fine-tuning with the new data, the checkpoint undergoes an additional RL process, taking
+into account prompts from all scenarios. After these steps, we obtained a checkpoint referred to
+ as DeepSeek-R1, which achieves performance on par with OpenAI-o1-1217.
+We further explore distillation from DeepSeek-R1 to smaller dense models. Using Qwen2.5-
+32B (Qwen, 2024b) as the base model, direct distillation from DeepSeek-R1 outperforms applying
+ RL on it. This demonstrates that the reasoning patterns discovered by larger base models are cru-
+cial for improving reasoning capabilities. We open-source the distilled Qwen and Llama (Dubey
+et al., 2024) series. Notably, our distilled 14B model outperforms state-of-the-art open-source
+QwQ-32B-Preview (Qwen, 2024a) by a large margin, and the distilled 32B and 70B models set a
+new record on the reasoning benchmarks among dense models.
+3

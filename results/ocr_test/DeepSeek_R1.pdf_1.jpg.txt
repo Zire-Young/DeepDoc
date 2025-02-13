@@ -1,0 +1,54 @@
+Contents
+1 Introduction
+1.1Contributions
+1.2  Summary of Evaluation Results
+2 Approach
+5
+2.1Overview .
+5
+2.2 DeepSeek-R1-Zero: Reinforcement Learning on the Base Model
+5
+2.2.1
+ Reinforcement Learning Algorithm.
+5
+2.2.2
+ Reward Modeling
+6
+2.2.3
+Training Template
+6
+2.2.4
+Performance, Self-evolution Process and Aha Moment of DeepSeek-R1-Zero
+6
+ 2.3 DeepSeek-R1: Reinforcement Learning with Cold Start
+9
+2.3.1
+Cold Start
+9
+2.3.2
+ Reasoning-oriented Reinforcement Learning
+10
+2.3.3
+ Rejection Sampling and Supervised Fine-Tuning .
+10
+2.3.4
+ Reinforcement Learning for all Scenarios
+11
+ 2.4 Distillation: Empower Small Models with Reasoning Capability
+11
+3Experiment
+11
+3.1DeepSeek-R1 Evaluation
+13
+3.2Distilled Model Evaluation
+14
+4 Discussion
+14
+4.1Distillation v.s. Reinforcement Learning
+14
+4.2   Unsuccessful Attempts .
+15
+5  Conclusion, Limitations, and Future Work
+16
+A Contributions and Acknowledgments
+20
